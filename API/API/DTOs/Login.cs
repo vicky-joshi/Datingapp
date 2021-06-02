@@ -4,17 +4,15 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Entities
+namespace API.DTOs
 {
-    public class AppUser
+    public class LoginDto
     {
-        public int Id { get; set; }
 
-        [Required(ErrorMessage ="Please enter username!")]
+        [Required(ErrorMessage = "Please enter username!")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "Please enter password!")]
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
+        public string Password { get; set; }
 
     }
 }
