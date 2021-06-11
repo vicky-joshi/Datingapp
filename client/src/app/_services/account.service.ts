@@ -15,7 +15,8 @@ export class AccountService {
   private CusrrentUserSource =new ReplaySubject<User>(1);
  currentUser$=this.CusrrentUserSource.asObservable();
 
-  login(users:any){
+  login(users:any)
+  {
    return this.http.post<User>(this.baseurl+"/Accounts/Login",users).pipe
    (map((reponse:User)=>{
      const result=reponse;
@@ -24,19 +25,30 @@ export class AccountService {
        localStorage.setItem('user',JSON.stringify(result));
 this.CusrrentUserSource.next(result);
       }
-
    }))
   }
 
-setCurrentUser(user:User){
-this.CusrrentUserSource.next(user);
-
-}
+  setCurrentUser(user:User){
+  this.CusrrentUserSource.next(user);
+  }
 
   logout(){
   localStorage.removeItem('user')  
   this.CusrrentUserSource.next();
-
   }
+
+  register(model:any){
+    this.http.post<User>(this.baseurl+'accounts/Register',model).pipe(map((res:User)=>{
+    const response=res;
+    if(response)
+    {
+      localStorage.setItem('user',JSON.stringify(response))
+      this.CusrrentUserSource.next(response);
+    }
+    }))
+  }
+
+
+
 
 }

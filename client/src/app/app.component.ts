@@ -16,16 +16,8 @@ users:any;
   constructor(private http:HttpClient,private acccountservice:AccountService){}
   
   ngOnInit() {
-   this.GetUsers();
    this.setCurrentUset();
   }
-
-GetUsers(){
-  this.http.get("https://localhost:44355/api/Users").subscribe(res=>{
-this.users=res
-  },error=>{console.log(error)},
-  )
-}
  
 setCurrentUset(){
   const u=localStorage.getItem('user')!
